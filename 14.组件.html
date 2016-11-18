@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{padding:0;margin:0;}
+			body{font:16px/24px "微软雅黑";color:#666;}
+			div{
+				padding:20px;border-bottom:1px solid #ccc;			
+				margin-bottom:10px;	
+			}
+			ul,ol{padding-left:20px;}
+			button{padding:5px 10px;color:#666;}
+			h5{font-size:20px;}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<my-component></my-component>
+		</div>
+		
+		<div id="box2">
+			<my-com></my-com>
+			<ul>
+				<li is="my-coms"></li>
+			</ul>
+		</div>
+		
+		
+		<div id="box3">
+			
+		</div>
+		
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript">
+			/*
+			 	组件：
+			 		可以扩展html元素，封装可以重用的代码！
+			 		组件也可以是原生的HTML元素的形式，以is特效扩展
+			 		
+			 		注册全局组件：
+			 			Vue.component('my-component',{
+			 				//选项
+			 			})
+			 		
+			 		组件名：使用烤串的命名，也可以使用小驼峰命名,或者全小写
+			 		如：my-component | myComponent | mycomponent ,官方推荐：烤串式命名
+			 		
+			 		
+			 */
+				//注册全局组件
+				Vue.component('my-component',{
+	 				template:'<div>这是一个全局组件！！！</div>'
+	 			});
+	 			// 创建根实例
+	 			var vm1 = new Vue({
+	 				el : "#box"
+	 			});
+	 			
+	 			
+	 			var Child = {
+	 				template:"<div>这是一个局部组件</div>"
+	 			};
+	 			
+	 			var Childs = {
+	 				template:"<li>"+
+			 				"	<div>这是一个局部组件</div>"+
+			 				"</li>"
+	 			};
+	 			
+	 			// 创建根实例
+	 			var vm2 = new Vue({
+	 				el : "#box2",
+	 				components : {  //将只在父模板可用
+	 					"my-com":Child,
+	 					"my-coms":Childs
+	 				}
+	 			});
+	 			
+	 			
+	 			var vm3 = new Vue()
+	 			
+			
+		</script>
+		
+	</body>
+</html>
