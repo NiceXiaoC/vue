@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{padding:0;margin:0;}
+			body{font:16px/24px "微软雅黑";color:#666;}
+			div{
+				padding:20px;border-bottom:1px solid #ccc;			
+				margin-bottom:10px;	
+			}
+			ul,ol{padding-left:20px;}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<ul>
+				<li v-for="n in evenNum" v-html='n'></li>
+			</ul>
+			<span v-for="n in even(number)" >{{n}} </span>
+		</div>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript">
+			/*
+			 	
+			 	变异方法：Vue 包含一组观察数组的变异方法，使用它们将会触发视图更新
+					1、push() ：在数组后面添加一个数据
+					2、pop() ： 删除并返回数组的最后一个元素。
+					3、shift() :删除并返回数组的第一个元素。
+					4、unshift() ： 在数组的前面添加数据
+					5、splice() ： 替换数组
+					6、sort()：排序
+					7、reverse() ： 反转
+			*/
+			/*
+				显示过滤/排序结果
+					
+				
+			*/
+			
+			new Vue({
+				el:"#box",
+				data:{
+					number :[1,2,3,4,5,6,66]
+				},
+				computed:{ //计算属性
+					evenNum:function(){
+						return this.number.filter(function(num){
+							return num % 2 === 0;
+						})
+					},
+				},
+				methods:{ // 方法
+					 even: function (number) {
+					    return number.filter(function (n) {
+					      return n % 2 === 0
+					    })
+					}
+				}
+			})
+			
+			
+			
+		</script>
+		
+	</body>
+</html>

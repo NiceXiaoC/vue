@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{padding:0;margin:0;}
+			body{font:16px/24px "微软雅黑";color:#666;}
+			div{
+				padding:20px;border-bottom:1px solid #ccc;			
+				margin-bottom:10px;	
+			}
+			ul,ol{padding-left:20px;}
+			button{padding:5px 10px;color:#666;}
+			.mb10{margin-bottom:10px;}
+			h5{font-size:20px;}
+		</style>
+	</head>
+	<body>
+		
+		<div id="box1">
+			<h5>单行文本:</h5>
+			<input v-model="msg" />
+			<p class="mb10">{{msg}}</p>
+			
+			<h5>多行文本:</h5>
+			<textarea v-model="msg1"></textarea>
+			<p class="mb10">{{msg1}}</p>
+			
+			<h5>复选框</h5>
+			<label>
+			<input type="checkbox" v-model="checked" />
+				{{checked}}
+			</label>
+			
+			<p class="mb10"></p>
+			<p class="mb10"></p>
+			
+			<h5>多个勾选框，绑定到同一个数组：</h5>
+			<input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+			<label for="jack">Jack</label>
+			<input type="checkbox" id="john" value="John" v-model="checkedNames">
+			<label for="john">John</label>
+			<input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+			<label for="mike">Mike</label>
+			<p class="mb10">checked name is: {{checkedNames}}</p>
+			<p class="mb10"></p>
+			
+			<h5>单选按钮</h5>
+			<label>
+				<input type="radio" value="男" v-model="picked"/>:男
+			</label>
+			<label>
+				<input type="radio" value="女" v-model="picked"/>:女
+			</label>
+			<p>{{picked}}</p>
+			
+			<p class="mb10"></p>
+			
+			<h5>选择列表</h5>
+			<select v-model="selected">
+				<option>11111111</option>
+				<option>22222222</option>
+				<option>33333333</option>
+			</select>
+			<p class="mb10">{{selected}}</p>
+			
+			
+			
+			<select v-model="selected2" multiple>
+			  <option>A1111111111</option>
+			  <option>B2222222223</option>
+			  <option>C33333333333</option>
+			</select>
+			<br>
+			<span>Selected: {{ selected2 }}</span>
+			
+		</div>
+		
+		<div id="box2">
+			<select v-model="selected">
+				 <option v-for="option in options" v-bind:value="option.value">
+					{{option.txt}}
+				</option>
+			</select>
+			<!--在默认情况下， v-model 在 input 事件中同步输入框的值与数据，但你可以添加一个修饰符 lazy ，从而转变为在 change 事件中同步：即：发生改变后触发-->
+			<input type="text" v-model.lazy='msg' />
+			<p class="mb10">{{msg}}</p>
+			
+			<!--只有纯数字才会跟新-->
+			<input v-model.number="age" type="number">
+			<p class="mb10">{{age}}</p>
+			
+			<!--去掉首位空格-->
+			<input v-model.trim="txt" type="number">
+			<p class="mb10">{{txt}}</p>
+			
+		</div>
+		
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript">
+			new Vue({
+				el : '#box1',
+				data:{
+					msg : '1111',
+					msg1 : '',
+					checked:false,
+					checkedNames:[],
+					picked :'',
+					selected:'',
+					selected2:[]
+				}
+			});
+			new Vue({
+				el :'#box2',
+				data:{
+					selected:'2',
+					options:[
+						{txt:'one11111',value:'1'},
+						{txt:'two22222',value:'2'},
+						{txt:'three3333',value:'3'},
+					],
+					msg:"hehe",
+					age:30,
+					txt:'123456'
+				}
+			})
+			
+		</script>		
+	</body>
+</html>

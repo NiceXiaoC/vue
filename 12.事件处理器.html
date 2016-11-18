@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{padding:0;margin:0;}
+			body{font:16px/24px "微软雅黑";color:#666;}
+			div{
+				padding:20px;border-bottom:1px solid #ccc;			
+				margin-bottom:10px;	
+			}
+			ul,ol{padding-left:20px;}
+			button{padding:5px 10px;color:#666;}
+		</style>
+	</head>
+	<body>
+		
+		
+		<div id="box">
+			<!--
+				
+				事件的监听 
+					v-on 
+			-->
+			<button v-on:click="counter += 1">Add()</button>
+			<p v-html="count"></p>
+			
+		</div>
+		
+		<!--方法事件处理器-->
+		<div id="box1">
+			<button v-on:click="grenter">点击测试</button>
+		</div>
+		
+		
+		<!---
+			
+			内联处理器方法
+			
+		-->
+		
+		<div id="box2">
+			<button v-on:click="say('hi')">测试1</button>
+			<button v-on:click="say('hello VUE')">测试2</button>
+			
+			<!--有时也需要在内联语句处理器中访问原生 DOM 事件。可以用特殊变量 $event 把它传入方法：-->
+			<button v-on:click="warn('yet....',$event)">测试3</button>
+			
+			
+			<!--
+				事件修饰符
+					在事件处理程序中调用 event.preventDefault() 或 event.stopPropagation() 是非常常见的需求。
+					尽管我们可以在 methods 中轻松实现这点，但更好的方式是：methods 只有纯粹的数据逻辑，而不是去处理 DOM 事件细节。
+					
+					v-on 提供了 事件修饰符。通过由点(.)表示的指令后缀来调用修饰符。
+						.stop  ： 阻止单事件冒泡
+							如：	
+								<a href="javascript:void(0)" v-on:click:stop="doThis"></a>
+								
+						.prevent ： 提交事件不再重载页面
+							如：	
+								<form v-on:submit.prevent="onSubmit"></form>
+								修饰符串联：<a v-on:click.stop.prevent="doThat"></a>
+								只有修饰符：<form v-on:submit.prevent></form>
+						
+						.capture ： 事件侦听器时使用的事件捕获模式
+							<div v-on:click.capture="doThis">...</div>
+
+						.self ：只当事件在该元素本身（而不是子元素）触发时触发回调
+							<div v-on:click.self="doThat">...</div>
+				
+				按键修饰符：
+					enter
+					tab
+					delete(捕获“删除”和“退格”键)
+					esc
+					space
+					up
+					down
+					left
+					right
+					
+					如： <input v-on:keyup.13 = "submit"> //表示keyCode为13时调用submit方法
+						<input v-on:keyup.enter="submit">//表示按回车时调用submit方法
+						<input @keyup.enter="submit"> // 缩写方式
+			-->
+			
+			
+			
+			
+		</div>
+		
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript">
+			new Vue({
+				el : "#box",
+				data:{
+					counter:0
+				},
+				computed:{ //使用计算属性的方法来实现v-html 绑定
+					count :function(){
+						return "你点击了" + this.counter + "次";
+					}
+				}
+			});
+			
+			new Vue({
+				el : '#box1',
+				data:{
+					name:'vue.js'
+				},
+				methods:{
+					grenter:function(event){
+						alert('Hello'+this.name);
+						console.log(event);
+					}
+				}
+			});
+			
+			new Vue({
+				el : "#box2",
+				methods:{
+					say:function(message){
+						alert(message);
+					},
+					warn:function(message,event){
+						if(event) event.preventDefault();
+						alert(message);
+					}
+				}
+			});
+			
+			
+			
+		</script>
+		
+	</body>
+</html>
