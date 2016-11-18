@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{padding:0;margin:0;}
+			body{font:16px/24px "微软雅黑";color:#666;}
+			div{
+				padding:20px;border-bottom:1px solid #ccc;				
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+			v-once :指令 ，【一次性插值指令，使用后，插值处的内容不会更新】
+			如：	<div class="spaDom" v-once=>{{msg}}</div>
+			
+			v-html : 纯html，将大括号的数据解释为纯文本，而非html
+			
+			// 模板表达式
+			{{ number * 10 }}
+			{{ ok ? 'YES' : 'NO' }}
+			{{ message.split('').reverse().join('') }}
+			
+			
+			
+		-->
+		<div class="spaDom" v-bind:id='msg' v-html="msg.split('').reverse().join('')">	
+		</div>
+		
+		<script src="js/vue.js" type="text/javascript"></script>
+		
+
+		<script type="text/javascript">
+			var vm = new Vue({
+				el : '.spaDom',
+				data:{
+					msg:'小哈哈',
+					number : 10
+				}
+			})
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{padding:0;margin:0;}
+			body{font:16px/24px "微软雅黑";color:#666;}
+			div{
+				padding:20px;border-bottom:1px solid #ccc;				
+			}
+			ul{padding-left:10px;}
+			.fade-enter-active, .fade-leave-active {
+			  transition: opacity .5s
+			}
+			.fade-enter, .fade-leave-active {
+			  opacity: 0
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div id="app1">
+			<custom-compont></custom-compont>
+			<ul>
+				<my-firstcom v-for='fn1 in todos' v-bind:fn="fn1"></my-firstcom>
+			</ul>
+		</div>
+		
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript">
+			 /*
+			  * 	什么是组件
+			  *			组件可以扩展html元素，封装可重用的代码，是自定义元素，由vue编译器提供特殊功能。
+			  */
+			  /*
+			        Vue.component(组件名，参数选项)
+					        组件名：使用烤串的命名，也可以使用小驼峰命名,或者全小写，但在使用组件的时候，要用烤串命名
+					        参数选项：
+					            必须有template或render，否则报错
+					            模板必须只能有一个根元素
+				
+					         确保要在初始化根实例之前定义好组件
+			  */
+			//驼峰命名法
+			Vue.component('myFirstcom',{
+				props : ['fn'],
+				template : '<li>{{fn.text}}</li>'
+			});
+			
+			// 烤串命名法
+			Vue.component('custom-compont',{
+				template : "<span>Hello :</span>"
+			})
+			
+			var app1 = new Vue({
+				el : "#app1",
+				data : {
+					todos : [
+						{text:"JavaScript"},
+						{text:'VUE'}
+					]
+				}
+			});
+			
+			
+		</script>
+		
+	</body>
+</html>

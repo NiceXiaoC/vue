@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{padding:0;margin:0;}
+			body{font:16px/24px "微软雅黑";color:#666;}
+			div{
+				padding:20px;border-bottom:1px solid #ccc;			
+				margin-bottom:10px;	
+			}
+			.active{border:2px solid red;}
+		</style>
+	</head>
+	<body>
+		
+		<!--
+			class active样式 取决于isActive的值，true：绑定，false：取消绑定
+		-->
+		<div id="demo1" class="parents" v-on:click="isActive=!isActive" v-bind:class="{active:isActive,text:isTrue}">
+			class active样式 取决于isActive的值，true：绑定，false：取消绑定
+		</div>
+		
+		<!---
+			绑定一个对象：
+		-->
+		<div id="demo2" v-on:click="classObject.active=!classObject.active" v-bind:class="classObject">
+			绑定一个对象：
+		</div>
+		
+		
+		<!--
+			绑定返回对象的计算属性
+		-->
+		
+		<div id="demo3" v-on:click="error=!error" v-bind:class="classObject">
+			绑定返回对象的计算属性
+		</div>
+		
+		
+		<!--
+			
+			数组语法
+				我们可以把一个数组传给 v-bind:class ，以应用一个 class 列表
+		-->
+		
+		<!--<div id="demo4" v-bind:class="[activeClass,errorClass]"></div>-->
+		<div id="demo4" v-on:click="isActive=!isActive" v-bind:class="[{active :isActive },errorClass]">
+			数组语法
+		</div>
+		
+		
+		<!--
+			绑定内联样式
+			v-bind:style 的对象语法十分直观——看着非常像 CSS ，其实它是一个 JavaScript 对象。 CSS 属性名可以用驼峰式（camelCase）或短横分隔命名（kebab-case）：
+		-->
+		<div id="demo5" v-bind:style="{color:color,fontSize:fontSize,backgroundColor:bg}">
+			绑定内联样式
+		</div>
+		
+		<!--
+			
+			对象式绑定内联样式
+				让模板更清晰：
+		-->
+		
+		<div id="demo6" v-bind:style="styles">
+			对象式绑定内联样式
+		</div>
+		
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript">
+			
+			//值绑定
+			var vm1 = new Vue({
+				el : "#demo1",
+				data:{
+					isActive:true,
+					isTrue : true
+				}
+			});
+			
+			//对象绑定
+			var vm2 = new Vue({
+				el:"#demo2",
+				data:{
+					classObject:{
+						"active":true,
+						"text" :true
+					}
+				}
+			});
+			
+			//计算属性绑定
+			var vm3 = new Vue({
+				el : '#demo3',
+				data : {
+					"active":true,
+					"text" :true,
+					error:true
+				},
+				computed:{
+					classObject : function(){
+						return {
+							"active" : this.active && this.error,
+						}
+					}
+				}
+			});
+			
+			//数组绑定
+			var vm4 = new Vue({
+				el : "#demo4",
+				data:{
+					activeClass : "active",
+					errorClass : "error",
+					isActive : true
+				}
+			});
+			
+			//绑定内联样式
+			var vm5 = new Vue({
+				el : '#demo5',
+				data : {
+					color:'#fff',
+					fontSize:"30px",
+					bg:'deeppink'
+				}
+			});
+			
+			//对象式绑定内联样式
+			var vm6 = new Vue({
+				el : '#demo6',
+				data : {
+					styles:{
+						color : '#666',
+						fontSize:"30px",
+						transform:"scale(0.5)"
+					}
+				}
+			})
+			
+		</script>
+	</body>
+</html>

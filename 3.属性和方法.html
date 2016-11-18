@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{padding:0;margin:0;}
+			body{font:16px/24px "微软雅黑";color:#666;}
+			div{
+				padding:20px;border-bottom:1px solid #ccc;				
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript" src="js/vue.js" ></script>
+		
+		<script type="text/javascript">
+			var data = {a:1};
+			var vm = new Vue({
+				data:data
+			});
+			console.log(vm.a === data.a); //true
+			
+			//属性与方法都有前缀 $，以便与代理的 data 属性区分
+			console.log(vm.$data === data); //true
+			
+			
+			//$watch : 一个实例方法，用来监控值得变化，变化后触发
+			vm.$watch('a',function(newVal,oldVal){
+				console.log(newVal,oldVal);
+				console.log(this); // vue 对象
+			});
+			/*
+			   //箭头函数中 this代表 window对象，所以在实例属性或者毁掉函数中尽量不要使用箭头函数
+				vm.$watch('a',(newVal,oldVal)=>{
+				console.log(newVal,oldVal);
+				console.log(this); //window 对象
+			})*/
+			
+			//生命周期
+			var vm1 = new Vue({
+				data:{
+					a : 1
+				},
+				created : function(){
+					console.log("a is: " + this.a,this);//this指向当前Vue的实例
+				}
+				/*created : (()=>{
+					console.log(this.a,this); //当前this指向window,因此无法访问当前实例中的属性与方法
+				})*/
+			})
+			
+		</script>
+	</body>
+</html>
