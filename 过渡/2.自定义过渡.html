@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="../css/animates.css" rel="stylesheet" type="text/css">
+		<style type="text/css">
+			*{padding:0;margin:0;}
+			body{font:16px/24px "微软雅黑";color:#666;}
+			div{
+				padding:20px;border-bottom:1px solid #ccc;			
+				margin-bottom:10px;	
+			}
+			ul,ol{padding-left:20px;}
+			button{padding:5px 10px;color:#666;}
+			h5{font-size:20px;}
+			p{margin:10px}
+			h5 p{font-size:18px;font-weight:500;}
+			
+			
+			.demo{border:1px solid red;width:100px;height:100px;margin:10px;}
+		</style>
+	</head>
+	<body>
+		
+		<div id="box">
+			<button @click="isTrue = !isTrue">自定义过渡</button>
+			<transition appear name="myAnimate" 
+						enter-active-class="animated swing" 
+						leave-active-class="animated bounceOutRight">
+				<div class="demo" v-if="isTrue"></div>
+			</transition>
+		</div>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<script type="text/javascript">
+			/*
+				 v-enter: 定义进入过渡的开始状态。在元素被插入时生效，在下一个帧移除。
+				 v-enter-active: 定义进入过渡的结束状态。在元素被插入时生效，在 transition/animation 完成之后移除。
+				 v-leave: 定义离开过渡的开始状态。在离开过渡被触发时生效，在下一个帧移除。
+				 v-leave-active: 定义离开过渡的结束状态。在离开过渡被触发时生效，在 transition/animation 完成之后移除。
+			
+					// 自定义过渡类名
+					enter-class
+					enter-active-class
+					leave-class
+					leave-active-class
+					
+					注：他们的优先级高于普通的类名
+					
+			*/
+			var v1 = new Vue({
+				el : "#box",
+				data:{
+					isTrue:true
+				}
+			});
+			
+			
+		</script>
+	</body>
+</html>

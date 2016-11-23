@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="css/animates.css" rel="stylesheet" type="text/css">
+		<style type="text/css">
+			*{padding:0;margin:0;}
+			body{font:16px/24px "微软雅黑";color:#666;overflow: hidden;}
+			div{
+				padding:20px;border-bottom:1px solid #ccc;			
+				margin-bottom:10px;	
+			}
+			ul,ol{padding-left:20px;}
+			button{padding:5px 10px;color:#666;}
+			h5{font-size:20px;}
+			p{margin:10px}
+			h5 p{font-size:18px;font-weight:500;}
+			
+			
+			.fade-enter-active,.fade-leave-active{
+				transition: opacity .5s;
+			}
+			.fade-enter,.fade-leave-active{
+				opacity: 0;
+			}
+			
+			
+			.slide-fade-enter-active{
+				transition: all .3s ease;
+			}
+			.slide-fade-leave-active{
+				 transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+			}
+			.slide-fade-enter,.slide-fade-leave-active{
+				opacity:0;
+			}
+			
+			
+			.bounce-enter-active{
+				animation: bounce-in .5s;
+			}
+			.bounce-leave-active{
+				animation: bounce-out .5s;
+			}
+			@-webkit-keyframes bounce-in{
+				0%{transform: scale(0);}
+				50%{transform: scale(1.5);}
+				100%{transform: scale(1);}
+			}
+			
+			@-webkit-keyframes bounce-out{
+				0%{transform: scale(1);}
+				50%{transform: scale(1.5);}
+				100%{transform: scale(0);}
+			}
+			.demo{border:1px solid red;width:100px;height:100px;margin:10px;}
+		</style>
+	</head>
+	<body>
+		
+		<div id="box">
+			<button @click="show=!show">toggle</button>
+			<transition name="fade">
+				<p v-if="show">hello</p>
+			</transition>
+			
+			<button @click="show1=!show1">toggle</button>
+			<transition name="slide-fade">
+				<p v-if="show1">hello</p>
+			</transition>
+						
+			
+			<button @click="show2=!show2">toggle</button>
+			<transition name="bounce">
+				<p v-if="show2">hello</p>
+			</transition>
+		</div>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<script type="text/javascript">
+			/*
+				 v-enter: 定义进入过渡的开始状态。在元素被插入时生效，在下一个帧移除。
+				 v-enter-active: 定义进入过渡的结束状态。在元素被插入时生效，在 transition/animation 完成之后移除。
+				 v-leave: 定义离开过渡的开始状态。在离开过渡被触发时生效，在下一个帧移除。
+				 v-leave-active: 定义离开过渡的结束状态。在离开过渡被触发时生效，在 transition/animation 完成之后移除。
+			*/
+			
+			var v1 = new Vue({
+				el : "#box",
+				data:{
+					show:true,
+					show1:true,
+					show2:true
+				}
+			});
+			
+		</script>
+	</body>
+</html>

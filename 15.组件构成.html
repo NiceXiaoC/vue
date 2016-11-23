@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{padding:0;margin:0;}
+			body{font:16px/24px "微软雅黑";color:#666;}
+			div{
+				padding:20px;border-bottom:1px solid #ccc;			
+				margin-bottom:10px;	
+			}
+			ul,ol{padding-left:20px;}
+			button{padding:5px 10px;color:#666;}
+			h5{font-size:20px;}
+			p{margin:10px}
+			h5 p{font-size:18px;font-weight:500;}
+		</style>
+	</head>
+	<body>
+		
+		<div id="box1">
+			<h5>使用props传值
+				<p>这意味着不能并且不应该在子组件的模板内直接引用父组件的数据。可以使用 props 把数据传给子组件。</p>
+			</h5>
+			<p>prop 是父组件用来传递数据的一个自定义属性。子组件需要显式地用 props 选项 声明 “prop”：</p>
+		
+			<div>
+				<child message="这是第一种方式"></child>
+				<child2 my-message="这是另一种方式"></child2>
+			</div>
+			
+			
+			<h5>动态props：</h5>
+			<div>
+				<input v-model="parentMsg" />
+				<child3 v-bind:my-message="parentMsg"></child3>
+			</div>
+			
+		</div>
+		
+		<div id="box2">
+			<child4 initial-counter="hehehhasdDDDD"></child4>
+			<br>
+			<child5 size="ASSCcadsc"></child5>
+		</div>
+		
+		
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript">
+			/*
+			 	组件意味着协同工作:
+			 		
+			 		1、组件 A 在它的模版中使用了组件 B 
+			 		2、父组件要给子组件传递数据，子组件需要将它内部发生的事情告知给父组件
+			 	
+			 		注意：在一个良好定义的接口中尽可能将父子组件解耦是很重要的。这保证了每个组件可以在相对隔离的环境中书写和理解，也大幅提高了组件的可维护性和可重用性。
+			 		
+			 		父子组件的关系可以总结为 props down, events up 
+			 		即：父组件通过 props 向下传递数据给子组件，子组件通过 events 给父组件发送消息
+			 		
+			 */
+			
+			Vue.component('child',{
+				//声明props
+				props : ['message'],
+				//像data一样，prop可以用在模板内
+				 // 同样也可以在 vm 实例中像 “this.message” 这样使用
+				template : '<span>{{ message }}</span>'
+			});
+			
+			//HTML 特性不区分大小写。当使用非字符串模版时，prop的名字形式会从 camelCase 转为 kebab-case（短横线隔开）：
+			
+			Vue.component('child2',{
+				//声明props
+				props : ['myMessage'],
+				//像data一样，prop可以用在模板内
+				 // 同样也可以在 vm 实例中像 “this.message” 这样使用
+				template : '<span>{{ myMessage }}</span>'
+			});
+			
+			Vue.component('child3', {
+			  // camelCase in JavaScript
+			  props: ['myMessage'],
+			  template: '<span>{{ myMessage }}</span>'
+			});
+			
+			var vm1 = new Vue({
+				el　:　'#box1',
+				data:{
+					parentMsg : '12345'
+				}
+			});
+			
+			/*
+				prop是单向数据绑定：当父组件的属性变化时，将传值给子组件，但是不会反过来，这是为了防止子组件无意修改了父组件的状态——这会让应用的数据流难以理解。
+				
+				每次父组件更新时，子组件的所有 prop 都会更新为最新值。这意味着你不应该在子组件内部改变 prop 。如果你这么做了，Vue 会在控制台给出警告。
+				
+				通常有两种改变 prop 的情况：
+				1、prop 作为初始值传入，子组件之后只是将它的初始值作为本地数据的初始值使用；
+				2、prop 作为需要被转变的原始值传入。
+				
+				
+				注意：JavaScript 中对象和数组是引用类型，指向同一个内存空间，如果 prop 是一个对象或数组，在子组件内部改变它会影响父组件的状态。
+				
+			*/
+			//定义一个局部 data 属性，并将 prop 的初始值作为局部数据的初始值。
+			
+			Vue.component('child4',{
+				props: ['initialCounter'],
+				template: '<span>{{ initialCounter }}</span>',
+				data: function () {
+				  return { counter: this.initialCounter }
+				}
+			});
+			
+			//定义一个 computed 属性，此属性从 prop 的值计算得出。
+			Vue.component("child5",{
+				props:['size'],
+				template: '<span>{{ normalizedSize }}</span>',
+				computed:{ //计算属性
+					normalizedSize : function(){
+						return this.size.trim().toLowerCase();
+					}
+				}
+			});
+			
+			var vm2=new Vue({
+				el: '#box2'
+			})
+			
+		</script>
+		
+	</body>
+</html>

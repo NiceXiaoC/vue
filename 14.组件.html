@@ -13,6 +13,7 @@
 			ul,ol{padding-left:20px;}
 			button{padding:5px 10px;color:#666;}
 			h5{font-size:20px;}
+			p{margin:10px}
 		</style>
 	</head>
 	<body>
@@ -29,7 +30,10 @@
 		
 		
 		<div id="box3">
+			<simple-counter></simple-counter>
+			<simple-counter></simple-counter>
 			
+			<p><new-tempalte></new-tempalte><new-tempalte></new-tempalte></p>
 		</div>
 		
 		<script type="text/javascript" src="js/vue.js" ></script>
@@ -79,9 +83,31 @@
 	 			});
 	 			
 	 			
-	 			var vm3 = new Vue()
+	 			//模板中的data(数据)必须是一个函数，返回值必须是个object
+	 			Vue.component('simple-counter',{
+	 				template:'<button v-on:click="counter += 1">qua{{counter}}</button>',
+	 				data:function(){
+	 					return {counter:0};
+	 				}
+	 			});
 	 			
-			
+	 			
+	 			//三个组件共享了同一个 newData，因此改变一个值。其他的都改变
+	 			var newData = {counter:0}
+	 			var vmsChilds = {
+	 				template:'<button v-on:click="counter += 2">这是一个局部共享组件{{counter}}</button>',
+	 				data:function(){
+	 					return newData;
+	 				}
+	 			}
+	 			
+	 			var vm3 = new Vue({
+	 				el : "#box3",
+	 				components:{
+	 					'new-tempalte':vmsChilds
+	 				}
+	 			})
+				
 		</script>
 		
 	</body>
