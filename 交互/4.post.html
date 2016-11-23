@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="box">
+			<input type="button" value="按钮" @click="get"/>
+		</div>
+		
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<script type="text/javascript" src="../js/vue-resource.js" ></script>
+		<script type="text/javascript">
+			new Vue({
+				el : "#box",
+				data:{
+					
+				},
+				methods:{
+					get:function(){
+						this.$http.get('post.php',{
+							a:1,
+							b:2
+						},{
+							emulateJSON:true //发送post请求
+						}).then(function(res){
+							console.log(res);
+							alert(res.data);
+						},function(res){
+							console.log(res.data);//<html><body><h1>文件/vue/%E4%BA%A4%E4%BA%92/aa.txt未找到</h1></body></html>
+							alert(res.status); //状态：404 
+						})
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

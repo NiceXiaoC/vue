@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="box">
+			<input type="text" v-model = 't1' @keyup="get"/>
+			<ul>
+				<li v-for="value in myData">
+					{{value}}
+				</li>
+			</ul>
+			<p v-show="myData.length===0">暂无数据</p>
+		</div>
+		
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<script type="text/javascript" src="../js/vue-resource.js" ></script>
+		<script type="text/javascript">
+			new Vue({
+				el : "#box",
+				data:{
+					myData : [],
+					t1 : ''
+				},
+				methods:{
+					get :function(){
+						this.$http.jsonp('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',{
+							wd:this.t1
+						},{
+							jsonp:'cb' //配置callback的名称  默认callback
+						}).then(function(res){
+							this.myData = res.data.s;
+						},function(res){
+							console.log(res.data);//<html><body><h1>文件/vue/%E4%BA%A4%E4%BA%92/aa.txt未找到</h1></body></html>
+							alert(res.status); //状态：404 
+						})
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.active{
+				background: deeppink;
+			}
+			
+		</style>
+	</head>
+	<body>
+		
+		<!--
+			
+			.prevent : 阻止默认行为
+			.stop :　阻止冒泡
+			
+		-->
+		<div id="box">
+			<input type="text" v-model = 't1' @keyup="get" @keydown.down="changeDown" @keydown.up.prevent="changeUp" @keydown.enter="changeEnter"/>
+			<ul>
+				<li v-for="(value,index) in myData" v-bind:class="{active:index==now}">
+					{{value}} {{index}}
+				</li>
+			</ul>
+			<p v-show="myData.length===0">暂无数据</p>
+		</div>
+		
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<script type="text/javascript" src="../js/vue-resource.js" ></script>
+		<script type="text/javascript">
+			new Vue({
+				el : "#box",
+				data:{
+					myData : [],
+					t1 : '',
+					now : -1
+				},
+				methods:{
+					get :function(){
+						this.$http.jsonp('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',{
+							wd:this.t1,
+						},{
+							jsonp:'cb' //配置callback的名称  默认callback
+						}).then(function(res){
+							this.myData = res.data.s;
+							if(this.myData.length===0){
+								this.now=-1;
+							}
+						});
+					},
+					changeDown:function(){
+						this.now ++;
+						if(this.now>=this.myData.length){
+							this.now = 0;
+						}
+					},
+					changeUp:function(){
+						this.now --;
+						if(this.now<0){
+							this.now = this.myData.length-1;
+						}
+					},
+					changeEnter:function(){
+						this.t1 = this.myData[this.now];
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
