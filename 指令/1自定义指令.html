@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			{{msg}}
+			<span v-red>
+				{{msg}}
+			</span>
+		</div>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<script type="text/javascript">
+		
+			Vue.directive('red',function(el){
+				// el 表示当前的元素
+				el.style.background = 'red';
+			});
+			
+			var vm = new Vue({
+				el : '#box',
+				data : {
+					msg : 'hello'
+			 	}
+			});
+			
+		</script>
+	</body>
+</html>

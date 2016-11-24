@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			<input type="button" @click='doStuff' value="点击"/>
+		</div>
+		<script type="text/javascript" src="../js/lodash.js" ></script>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<script type="text/javascript">
+		
+			/*
+				debounce ： 延迟
+					官方推荐 配合lodashjs
+			
+			*/
+		
+			var vm = new Vue({
+				el : '#box',
+				methods : {
+					doStuff : _.debounce(function(){ 
+						alert(111);
+					},500) //延迟500ms后执行
+				}
+			})
+		</script>
+	</body>
+</html>

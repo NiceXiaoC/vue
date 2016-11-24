@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			<input type="text" v-model="msg" />
+			{{msg | fiterHtml}}
+		</div>
+		<script type="text/javascript" src="../js/lodash.js" ></script>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<script type="text/javascript">
+		
+			/*
+				
+			*/
+		
+			var vm = new Vue({
+				el : '#box',
+				data : {
+					msg : '<strong>12</strong>'
+			 	 },
+			  	filters:{
+			  		fiterHtml : function(item){
+				  		return item.replace(/<[^>]*>/g,"");
+			  		}
+			  	}
+			})
+			
+		</script>
+	</body>
+</html>

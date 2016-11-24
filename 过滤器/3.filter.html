@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			<input type="text" v-model="query"/>
+			<ul>
+				<li v-for="item in computedList">{{item.msg}}</li>
+			</ul>
+		</div>
+		<script type="text/javascript" src="../js/lodash.js" ></script>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<script type="text/javascript">
+		
+			/*
+				slice ： 
+					在 computed 属性中使用js内置方法： .slice
+					废除：limitBy过滤器
+			*/
+		
+			var vm = new Vue({
+				el : '#box',
+				data : {
+					query: 'e',
+				    list: [
+				      { msg: 'Bruce Lee' },
+				      { msg: 'Jackie Chan' },
+				      { msg: 'Chuck Norris' },
+				      { msg: 'Jet Li' },
+				      { msg: 'Kung Fury' }
+				    ]
+			  },
+			  computed: { //计算
+			    computedList: function () {
+			      var vm = this
+			      return this.list.filter(function (item) {
+			      	console.log(item);
+			        return item.msg.toLowerCase().indexOf(vm.query.toLowerCase()) !== -1;//查找输入框的值
+			      })
+			    }
+			  }
+			})
+		</script>
+	</body>
+</html>

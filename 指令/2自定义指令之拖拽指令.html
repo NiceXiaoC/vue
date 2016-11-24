@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.aaa{width:100px;height:100px;background: red;position: absolute;left:100px;top:0;color:#fff;font:14px/100px "微软雅黑";text-align: center;}
+			.aaa1{left:200px;background: blue;}
+		
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div class="aaa" v-drag>
+				{{msg}}
+			</div>
+			<div class="aaa aaa1" v-drag>
+				{{msg}}
+			</div>
+		</div>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<script type="text/javascript">
+		
+			Vue.directive('drag',function(el){
+				// el 表示当前的元素
+				console.log(vm);
+				var oDiv = el;
+				oDiv.onmousedown = function(ev){
+					var disX = ev.clientX-oDiv.offsetLeft;
+					var disY = ev.clientY-oDiv.offsetTop;
+					document.onmousemove = function(ev){
+						var l = ev.clientX - disX;
+						var t = ev.clientY - disY;
+						oDiv.style.left = l+'px';
+						oDiv.style.top = t+'px';
+						oDiv.innerHTML = l+"px, "+t+"px";
+					}
+					document.onmouseup = function(ev){
+						document.onmousemove = null;
+						document.onmouseup = null;
+					}
+					return false;
+				}
+			});
+			
+			var vm = new Vue({
+				el : '#box',
+				data : {
+					msg : 'hello'
+			 	}
+			});
+			
+		</script>
+	</body>
+</html>

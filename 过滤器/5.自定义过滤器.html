@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			<input type="number" placeholder="number..." v-model="a"/>
+			<p>{{a|$filterA}}</p>
+			<p>{{a|$filterB}}</p>
+		</div>
+		<script type="text/javascript" src="../js/lodash.js" ></script>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<script type="text/javascript">
+		
+			/*
+				
+			*/
+		
+			var vm = new Vue({
+				el : '#box',
+				data : {
+					a : 100
+			  },
+			  filters:{
+			  	$filterA:function(value){
+			  		return value + '￥'
+			  	},
+			  	$filterB:function(value){
+			  		return '$'+value;
+			  	}
+			  }
+			})
+		</script>
+	</body>
+</html>

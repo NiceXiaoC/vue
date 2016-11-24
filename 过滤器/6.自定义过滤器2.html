@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			<p>{{date | dateFormat}}</p>
+		</div>
+		<script type="text/javascript" src="../js/lodash.js" ></script>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<script type="text/javascript">
+		
+			/*
+				
+			*/
+		
+			var vm = new Vue({
+				el : '#box',
+				data : {
+					date : Date.now()
+			 	 },
+			  	filters:{
+			  		dateFormat : function(item){
+				  		var oDate = new Date(item);
+				  		return  oDate.getFullYear() + '-' + (oDate.getMonth()+1) +'-'+oDate.getDay()
+			  		}
+			  	}
+			})
+			
+		</script>
+	</body>
+</html>

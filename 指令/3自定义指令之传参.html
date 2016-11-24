@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			{{msg}}
+			<span v-red="'red'">
+				{{msg}}
+			</span>
+			<span v-red="'blue'">
+				{{msg}}
+			</span>
+		</div>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<script type="text/javascript">
+		
+			Vue.directive('red',function(el,color){
+				console.log(el,color);
+				/*
+					el : 表示当前的元素对象
+					color:表示当前自定义的指令‘red’对象，可任意！！
+						  对象：
+						  	name :表示当前指令的名称
+						  	expression ： 当前指令值得描述
+						  	value : 当前指令的值
+						  	
+						  	...
+				*/
+				el.style.background = color.value;
+			});
+			
+			var vm = new Vue({
+				el : '#box',
+				data : {
+					msg : 'hello'
+			 	}
+			});
+			
+		</script>
+	</body>
+</html>

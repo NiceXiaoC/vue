@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			<ul>
+				<li v-for="item in orderedList">{{item}}</li>
+			</ul>
+		</div>
+		<script type="text/javascript" src="../js/lodash.js" ></script>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<script type="text/javascript">
+		
+			/*
+				slice ： 
+					在 computed 属性中使用js内置方法： .slice
+					废除：limitBy过滤器
+			*/
+		
+			var vm = new Vue({
+				el : '#box',
+				data : {
+					query: 'e',
+				    list: [
+				      1,2,3,4,6.5,7,4,65,23,9
+				    ]
+			  },
+			  computed: { //计算
+			    orderedList: function () {
+			    	
+			/*	    
+			 * 
+			 * 	_.orderBy 默认的排序方式是正序
+			 		return _.orderBy(this.list,function(item){
+				     	return -item; //倒序
+				     });*/
+				    /*
+					    return this.list.sort(function(a,b){ //倒序
+					    	return b-a;
+					    });
+					*/		
+					/*
+					return this.list.sort(function(a,b){ //正序
+					   	return a-b;
+					});
+					*/
+					return this.list.sort(function(a,b){ //随机排序
+					   	return Math.random()>0.5?1:-1;
+					});
+			    }
+			  }
+			})
+		</script>
+	</body>
+</html>
