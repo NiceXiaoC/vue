@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{font-size:26px;}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<span v-text="a"></span>
+		</div>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<script type="text/javascript">
+			
+			/*
+			 	vm.$mount ---> 手动挂载对象
+			*/
+			/*
+				var vm = new Vue({
+					data: {
+						a : 1
+					}
+				});
+				vm.$mount('#box');
+			*/			
+			
+			new Vue({
+				data: {
+					a : 1
+				}
+			}).$mount('#box');
+			
+			
+			
+		</script>
+		
+	</body>
+</html>
