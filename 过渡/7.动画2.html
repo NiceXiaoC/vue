@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="../css/animates.css" rel="stylesheet" type="text/css">
+		<style>
+			#box{padding:100px;}
+			#box1{width:100px;height:100px;background:red;}
+		</style>
+	</head>
+	<body>
+		
+		<div id="box">
+			<button @click="toggle">按钮</button>
+			<!--
+				动画的进入：enter-active-class
+				动画的离开：leave-active-class
+			-->
+			<transition 
+				enter-active-class="animated zoomInLeft"  
+				leave-active-class="animated zoomOutRight"
+			>
+				<div id="box1" v-if="isTrue" transition="fade">
+					
+				</div>	
+			</transition>
+		</div>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<script type="text/javascript">
+			/*
+				本质：css3
+			*/
+			var vm = new Vue({
+				el : '#box',
+				data:{
+					isTrue : true
+				},
+				methods : {
+					toggle : function(){
+						this.isTrue = !this.isTrue;
+					}
+				}
+			});
+			
+			
+		</script>
+	</body>
+</html>

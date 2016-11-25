@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{padding:0;margin:0;}
+			body{font:16px/24px "微软雅黑";color:#666;}
+			div{
+				padding:20px;border-bottom:1px solid #ccc;			
+				margin-bottom:10px;	
+			}
+			ul,ol{padding-left:20px;}
+			button{padding:5px 10px;color:#666;}
+			h5{font-size:20px;}
+			p{margin:10px}
+			h5 p{font-size:18px;font-weight:500;}
+		</style>
+	</head>
+	<body>
+		
+		<div id="box1">
+			<add></add>
+		</div>
+		
+		
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		
+		<script type="x-template" id='temp'>
+			<div>
+				<h1>标题1111111000</h1>
+				<ul>
+					<li>12345</li>
+					<li>12345</li>
+					<li>12345</li>
+					<li>12345</li>
+					<li>12345</li>
+				</ul>
+			</div>
+		</script>
+		
+		<script type="text/javascript">
+			
+			/*
+			模板：放到一个地方，供其他地方使用
+				模板必须有一个根节点
+				
+				方式一：<script type="x-template" id='temp'>
+						<\script>
+		 
+		*/
+			
+			var vm = new Vue({
+				el :'#box1',
+				data:{
+					msg : '134'
+				},
+				components:{
+					'add':{
+						template:'#temp',
+					}
+				}
+			});
+		</script>
+		
+	</body>
+</html>

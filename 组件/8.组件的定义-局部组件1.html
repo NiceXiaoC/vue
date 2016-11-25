@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{padding:0;margin:0;}
+			body{font:16px/24px "微软雅黑";color:#666;}
+			div{
+				padding:20px;border-bottom:1px solid #ccc;			
+				margin-bottom:10px;	
+			}
+			ul,ol{padding-left:20px;}
+			button{padding:5px 10px;color:#666;}
+			h5{font-size:20px;}
+			p{margin:10px}
+			h5 p{font-size:18px;font-weight:500;}
+		</style>
+	</head>
+	<body>
+		
+		<div id="box1">
+			<aaa></aaa>
+		</div>
+		
+		
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<script type="text/javascript">
+			
+			/*
+				组件的定义：
+			 		data ： 必须是一个函数，并且必须返回一个对象（json）
+			 		
+			 		
+			 		
+			*/
+			
+			var Aaa = Vue.extend({
+				template:'<h1 @click="show">{{msg}}</h1>',
+				data:function(){
+					return {
+						msg : '这是标题哦！！！！,点我哦！！！！'
+					}
+				},
+				methods:{
+					show(){
+						alert(1);
+					}
+				}
+			})
+			
+			
+			var vm = new Vue({
+				el :'#box1',
+				data:{
+					msg : '134'
+				},
+				components : { // 局部组件
+					aaa : Aaa 
+				}
+			});
+		</script>
+		
+	</body>
+</html>

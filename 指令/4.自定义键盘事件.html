@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+		<input type="text" @keydown.ctrl = "show"/>
+		</div>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<script type="text/javascript">
+			
+			/*
+				自定义键盘事件：
+					Vue.config.keyCodes[‘键盘名’] = 键盘码
+			*/
+		
+		
+			Vue.config.keyCodes.ctrl=17;
+			var vm = new Vue({
+				el : '#box',
+				methods : {
+					show : function(){
+						alert(1);
+					}
+				}
+			});
+			
+		</script>
+	</body>
+</html>

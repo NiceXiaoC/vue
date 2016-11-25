@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{padding:0;margin:0;}
+			body{font:16px/24px "微软雅黑";color:#666;}
+			div{
+				padding:20px;border-bottom:1px solid #ccc;			
+				margin-bottom:10px;	
+			}
+			ul,ol{padding-left:20px;}
+			button{padding:5px 10px;color:#666;}
+			h5{font-size:20px;}
+			p{margin:10px}
+			h5 p{font-size:18px;font-weight:500;}
+		</style>
+	</head>
+	<body>
+		
+		<div id="box1">
+			<add></add>
+		</div>
+		
+		<template id="aaa">
+			<div>
+				<h2>标题</h2>
+				<ul>
+					<li v-for='val in arr'>{{val}}</li>
+				</ul>
+			</div>
+		</template>
+		
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		
+		<script type="text/javascript">
+			
+			/*
+			模板：放到一个地方，供其他地方使用
+				   注意：模板必须有一个根节点，否则报错
+				
+				方式一：<script type="x-template" id='temp'>
+						<\script>
+						
+						
+				方式二：
+				<template id="aaa">
+					<div>
+						<h2>标题</h2>
+						<ul>
+							<li v-for='val in arr'>{{val}}</li>
+						</ul>
+					</div>
+				</template>
+		 
+		*/
+			
+			var vm = new Vue({
+				el :'#box1',
+				data:{
+					msg : '134'
+				},
+				components:{
+					'add':{
+						template:'#aaa',
+						data:function(){
+							return {
+								arr : [111,222,3,4,5,6,7,8]
+							}
+						}
+					}
+					
+				}
+			});
+		</script>
+		
+	</body>
+</html>

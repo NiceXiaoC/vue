@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			{{a | json}}
+		</div>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<script type="text/javascript">
+			
+			/*
+			 * 	vm.$watch(name,fnCb,{deep:true})； // 深度监听数据的变化
+			 * 
+			 */
+			Vue.config.keyCodes.ctrl=17;
+			var vm = new Vue({
+				el : '#box',
+				data:{
+					a : {name:'xiaoc',age:18},
+					b : 222
+				}
+			});
+			vm.$watch('a',function(){
+				alert('监听到数据发生了变化！！！')
+			},{deep:true});
+			
+			document.onclick = function(){
+				vm.a.name = '123456'
+			};
+			
+		</script>
+	</body>
+</html>

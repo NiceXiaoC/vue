@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{padding:0;margin:0;}
+			body{font:16px/24px "微软雅黑";color:#666;}
+			div{
+				padding:20px;border-bottom:1px solid #ccc;			
+				margin-bottom:10px;	
+			}
+			ul,ol{padding-left:20px;}
+			button{padding:5px 10px;color:#666;}
+			h5{font-size:20px;}
+			p{margin:10px}
+			h5 p{font-size:18px;font-weight:500;}
+		</style>
+	</head>
+	<body>
+		
+		<div id="box1">
+			<example prop-c="123456"></example>
+		</div>
+		
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript">
+			/*
+			 	
+				组件可以为 props 指定验证要求 
+				type 可以是下面原生构造器：String Number Boolean Function Object Array
+				
+				type 也可以是一个自定义构造器，使用 instanceof 检测。
+			  	
+			  	
+			  	default ： 为默认值
+			*/
+			
+			Vue.component('example',{
+				props : {
+					propA : Number, //基础数据类型检测（null意思是任何类型都可以）
+					propB : [String,Number],//多种类型
+					propC : { //必传且必须是字符串
+						type : String,
+						required : true,  //在组件中必须指定 proc的值，否则会发出警告
+					},
+					propD : { //数字，有默认值
+						type : Number,
+						default : 66
+					},
+					propE : {  // 数组／对象的默认值应当由一个工厂函数返回
+						type :　Object,
+						default : function(){
+							return {message : 'Hi'};
+						}
+					},
+					propF : {  // 自定义验证函数
+						validator : function(value){
+							return value > 100
+						}
+					}
+				},
+				template: '<input type="text" v-bind:value="propC"/>',
+			});
+			
+			var vm1 = new Vue({
+				el : "#box1",
+			})
+			
+		</script>
+		
+	</body>
+</html>

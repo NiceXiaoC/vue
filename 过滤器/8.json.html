@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			{{msg | json}}
+		</div>
+		<script type="text/javascript" src="../js/lodash.js" ></script>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el : '#box',
+				data : {
+					msg : {name:'xiaoc',age:18}
+			 	 }
+			})
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{padding:0;margin:0;}
+			body{font:16px/24px "微软雅黑";color:#666;}
+			div{
+				padding:20px;border-bottom:1px solid #ccc;				
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div id="box">
+			<p>a === > {{a}}</p>
+			<p>b === > {{b}}</p>
+		</div>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript">
+			/*
+				computed : 里面放置一个业务逻辑的代码,记得return
+			*/
+			var vm = new Vue({
+				el : '#box',
+				data:{
+					a : 1
+				},
+				computed:{
+					b : {
+						get : function(){  // 默认调用get()
+							return this.a + 100;
+						},
+						set:function(val){ //属性改变时触发[用来设置值]
+							return this.a = val++;
+						}
+					}
+				}
+			});
+			document.onclick = function(){
+				vm.b = 333;
+			}
+		</script>
+	</body>
+</html>

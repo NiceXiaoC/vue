@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{padding:0;margin:0;}
+			body{font:16px/24px "微软雅黑";color:#666;}
+			div{
+				padding:20px;border-bottom:1px solid #ccc;			
+				margin-bottom:10px;	
+			}
+			ul,ol{padding-left:20px;}
+			button{padding:5px 10px;color:#666;}
+			h5{font-size:20px;}
+			p{margin:10px}
+			h5 p{font-size:18px;font-weight:500;}
+		</style>
+	</head>
+	<body>
+		
+		<div id="box1">
+			 {{message}}
+			<my-com>
+				<!--在这里指定内容后，slot会被当前的内容给替换掉替换-->
+				<p>这是替换后的内容！！！！</p>
+			</my-com>
+		</div>
+		
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<script type="text/javascript">
+			/*
+			 * 
+			 *   为了组件可以组合，需要一种方式将父组件的内容和子组件的模板混合，这种方式称之为内容分发或transclusion
+
+				        使用特殊的solt元素作为原始内容那个的插槽
+				
+				        先来看组件作用域：
+				            父组件模板的内容在父组件作用域内编译；
+				            子组件模板的内容在子组件作用域内编译。
+				
+				        父组件模板不应该知道子组件的状态。
+				
+				        在组件上添加一个v-show指令，showContent的值为子组件的数据，这样不能影响子组件的影藏显示
+				
+				        子组件的数据那就再子组件的作用域内使用
+				
+				        在模板中使用一堆my-component标签组件嵌套的内容，应该属于父组件的
+				        子组件有其自己的作用域
+			 	
+				 使用特殊的solt元素作为原始内容的插槽
+	
+				        子组件内使用了solt标签，则父组件的内容片段将会被插入到solt标签位置并替换掉solt
+				
+				        如果子组件没有使用solt标签，则父组件的内容被抛弃。
+				
+				        当父组件没有提供内容，子组件中有solt标签，则显示solt中的内容，这种被称之为内容回退，回退的内容在子组件作用域编译。
+			*/
+			
+			new Vue({
+				el : "#box1",
+				data:{
+					message:"父组件信息",
+				},
+				components:{
+					'my-com':{
+						template :　`
+							<div v-show="showView">
+								{{message}}
+								<slot>
+								 	<p>父组件没有提供内容，提供了就替换我</p>
+								</slot>
+							</div>
+						`,
+						data:function(){
+							return {
+								message:'子组件信息',
+								showView : true
+							}
+						}
+					}
+				}
+			})
+			
+		</script>
+		
+	</body>
+</html>

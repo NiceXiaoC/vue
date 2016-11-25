@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{padding:0;margin:0;}
+			body{font:16px/24px "微软雅黑";color:#666;}
+			div{
+				padding:20px;border-bottom:1px solid #ccc;			
+				margin-bottom:10px;	
+			}
+			ul,ol{padding-left:20px;}
+			button{padding:5px 10px;color:#666;}
+			h5{font-size:20px;}
+			p{margin:10px}
+			h5 p{font-size:18px;font-weight:500;}
+			h1,h2{margin:20px;}
+		</style>
+	</head>
+	<body>
+		
+		<div id="box1">
+			<aaa></aaa>
+		</div>
+		
+		<template id="aaa">
+			<div>
+				<span>{{msg}}</span>
+				<bbb @child-msg = "get"></bbb>
+			</div>
+		</template>
+		<template id="bbb">
+			<div>
+				<span>{{a}}</span>
+				<input type="button" value="安安" @click="send"/>
+			</div>
+		</template>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		
+		<script type="text/javascript">
+			
+			/*
+			 	github : 搜索 ： vue-devtools  -----> 点击  Get it on the Chrome Web Store. 安装谷歌中vue调试器
+				
+				
+				vue中默认情况下：父组件数据 无法访问子组件的数据
+						解决方法： 子组件吧自己的数据发送到父级
+									vm.$emit(事件名，数据)
+									
+								   父组件接受子组件传递的数据
+								
+								 v-on:事件名 = "事件名"  类似自定义事件 
+								 
+								 
+			* */
+			
+			var vm = new Vue({
+				el :'#box1',
+				data:{
+					a:"aaa"
+				},
+				components:{
+					aaa : {
+						data:function(){
+							return {
+								msg:"这是父组件的数据！！！",
+								msg2:"这是第二条父组件的数据！！！"
+							}
+						},
+						template:"#aaa",
+						methods:{
+							get:function(value){
+								this.msg = value;
+							}
+						},
+						components:{
+							bbb : {
+								data:function(){
+									return {
+										a : '这是子组件的数据'
+									}
+								},
+								//props:['m','myMsg'],
+								template:"#bbb",
+								methods : {
+									send : function(){
+										this.$emit('child-msg',this.a);
+									}
+								}
+							}
+						}
+					}
+				}
+			});
+		</script>
+		
+	</body>
+</html>

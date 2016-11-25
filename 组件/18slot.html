@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="box">
+			<aa>
+			</aa>
+		</div>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<script type="text/javascript">
+			/*
+				slot:
+					作用：占位置
+					如果在组件中写入其他元素，，该位置的内容将被替换！！！！
+			*/
+			
+			var vm = new Vue({
+				el : '#box',
+				data:{
+					a:'aaaa'
+				},
+				components:{
+					'aa':{
+						template:`
+							<div>
+								<h1>XXXXXXXXXXXXXXX</h1>
+								<slot>
+									默认站位，，如果组件里面传值，将被替换
+								</slot>
+							</div>`
+					}
+				}
+			})
+			
+			
+		</script>
+		
+	</body>
+</html>

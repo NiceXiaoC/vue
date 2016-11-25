@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			{{a}}
+		</div>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<script type="text/javascript">
+			
+			/*
+				vm.$watch(name,fnCb); //浅度监听，只能监听简单类型的数据变化 
+			*/
+		
+			Vue.config.keyCodes.ctrl=17;
+			var vm = new Vue({
+				el : '#box',
+				data:{
+					a : 111,
+					b : 222
+				}
+			});
+			vm.$watch('a',function(){
+				alert('监听到数据发生了变化！！！')
+			})
+			
+			document.onclick = function(){
+				vm.a = 12324;
+			};
+			
+		</script>
+	</body>
+</html>
