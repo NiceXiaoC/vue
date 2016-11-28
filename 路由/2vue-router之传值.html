@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+		  <h1>Hello App!</h1>
+		  <p>
+		  	<!--使用router-link 组件来导航-->
+		  	<!--通过to属性来指定链接-->
+		  	<router-link to='/home'>主页</router-link>
+		  	<router-link to='/lists'>列表页</router-link>
+		  </p>
+		  
+		  <!--路由出口-->
+		  <div>
+		  	<router-view></router-view>
+		  </div>
+		  
+		  
+		</div>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<script type="text/javascript" src="../js/vue-router.js" ></script>
+		<script type="x-template" id='temp'>
+			<ul>
+				<li v-for='val in arr'>{{val}}</li>
+			</ul>
+		</script>
+		<script type="text/javascript">
+			
+			//1.定义路由的组件
+			const lists = {
+				template:'<div>这是列表页</div>'
+			};
+			
+			// 2.定义路由
+			//每个路由应该映射一个组件。 其中"component" 可以是
+			// 通过 Vue.extend() 创建的组件构造器，
+			const myRoutesPath   =[
+				{path:'/home',component:{
+					template:"#temp", 
+					data:function(){ // 必须是一个函数
+						return {  //返回值必须是一个对象
+								arr : [1,2,3,4,5,6,7,8]
+							}
+					}
+				}},
+				{path:'/lists',component:lists}
+			];
+			
+			// 3 创建router实例，，然后传给‘touters’配置
+			const myrouter  = new VueRouter({
+				routes  : myRoutesPath 
+			});
+			
+			const vm = new Vue({
+				router:myrouter 
+			}).$mount("#app");
+			
+		</script>
+	</body>
+</html>

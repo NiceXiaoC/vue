@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+		 
+		  <p>
+		  	<router-link to="/">首页</router-link>
+		  	<router-link to="/user/1">张三</router-link>
+		  	<router-link to="/user/2">李四</router-link>
+		  	<router-link to="/user/3">王五</router-link>
+		  </p>
+		  
+		  <h1>
+		  	<router-view></router-view>
+		  </h1>
+		  
+		  
+		  <div id="mydo">
+		  	
+		  </div>
+		</div>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<script type="text/javascript" src="../js/vue-router.js" ></script>
+		<script type="text/javascript">
+			/*
+				通常把某种模式匹配到的所有路由，全都映射到同个组件！
+				
+				动态路径参数使用 : 标记
+				
+				获取到动态路径参数，可以在this.$route.params中等到，可以在每个组件中使用
+				
+				也可以设置多段参数路径
+				模式								匹配路径				$route.params
+				/user/:username						/user/evan				{ username: 'evan' }
+				/user/:username/post/:post_id	/user/evan/post/123		{ username: 'evan', post_id: 123 }
+				
+				
+			*/
+			
+			
+			//定义对象的组件
+			const index = {
+				template : '<div>这是首页</div>'
+			}
+			const user = {
+				template : '<div>学员信息，id为：{{$route.params.id}}</div>',
+				created:function(){
+					console.log('作为生命周期的钩子，我被调用了一次');
+				},
+				watch:{
+					'$route':function(to,from){
+						var mydo = document.getElementById("mydo");
+						
+						mydo.innerHTML += "从"+from.path+"页面跳转到："+to.path+"页面<br/>";
+						
+						
+						console.log(from);
+						console.log(to);
+					}
+				}
+			};
+			
+			// 定义路由
+			const routes = [
+				{path:'/',component:index},
+				{path:'/user/:id',component:user}
+			]
+			
+			//创建路由的实例
+			
+			var myRoute = new VueRouter({
+				routes : routes
+			});
+			
+			var vm = new Vue({
+				el : '#app',
+				router : myRoute
+			})
+			
+		</script>
+	</body>
+</html>
