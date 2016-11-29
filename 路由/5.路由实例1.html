@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{margin:0;padding:0;}
+			body{background: #f8f8f9;padding:200px;overflow: hidden;font-family: "微软雅黑";box-sizing: border-box;}
+			#box{height:auto;}
+			.title{width:100px;height: auto;float:left;margin-right:50px;}
+			.title a{display: block;height:30px;line-height: 30px;border:1px solid #e8e8e8;text-align: center;text-decoration: none;color:#666;}
+			.title a:hover{background:#e8e8f8;}
+			.temp{float:left;width:460px;box-sizing:border-box;padding:10px;background: #fff;}
+			.temp h2{border-bottom: 1px solid #ccc;margin-bottom:20px;}
+		</style>
+	</head>
+	<body>
+		
+		<div id="box">
+			<div class="title">
+				<router-link to="/">home</router-link>
+				<router-link to="/about">about</router-link>
+			</div>
+			<div class="temp">
+				<!--组件的渲染-->
+				<router-view></router-view>
+			</div>
+		</div>
+		
+		
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<script type="text/javascript" src="../js/vue-router.js" ></script>
+		<script type="text/javascript">
+			// 定义组件
+			var Home = {
+				template:`<div>
+						<h2>Home</h2>
+						<p>{{msg}}</p>
+					</div>`,
+				data:function(){
+					return {msg:'hello ,vue router!!!'}
+				}
+			};
+			var About = {
+				template:`<div>
+						<h2>about</h2>
+						<p>This is the tutorial about vue-router.</p>
+					</div>`,
+			}
+			
+			//创建路由的实例
+			var myRouters = new VueRouter({
+				routes : [
+					{path:"/",component:Home},
+					{path:'/about',component:About}
+				]
+			});
+			
+			new Vue({
+				el : "#box",
+				router : myRouters
+			});
+		</script>
+	</body>
+</html>

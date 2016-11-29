@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{margin:0;padding:0;}
+			body{background: #f8f8f9;padding:200px;overflow: hidden;font-family: "微软雅黑";box-sizing: border-box;}
+			#box{height:auto;}
+			.title{width:100px;height: auto;float:left;margin-right:50px;}
+			.title a{display: block;height:30px;line-height: 30px;border:1px solid #e8e8e8;text-align: center;text-decoration: none;color:#666;}
+			.title a:hover{background:#e8e8f8;}
+			.temp{float:left;width:460px;box-sizing:border-box;padding:10px;background: #fff;}
+			.temp h2{border-bottom: 1px solid #ccc;margin-bottom:20px;}
+			ul,ol{padding-left:40px;}
+			.active{
+				background: deeppink;
+			}
+			.changes a{display: block;}
+			.active a{color:#fff;}
+		</style>
+	</head>
+	<body>
+		
+		<div id="box">
+			<div class="title">
+				<router-link to="/">home</router-link>
+				<router-link to="/about">about</router-link>
+			</div>
+			<div class="temp">
+				<!--组件的渲染-->
+				<router-view></router-view>
+			</div>
+		</div>
+		
+		
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<script type="text/javascript" src="../js/vue-router.js" ></script>
+		<script type="text/javascript">
+			// 定义组件
+			const Home = {
+				template:`<div>
+							<div>
+								<h2>Home</h2>
+								<p>{{msg}}</p>
+							</div>
+							<div class='btns'>
+								<router-link to="/home/news">news</router-link></li>
+								<router-link to="/home/message">message</router-link></li>
+							</div>
+							<div>
+								<router-view></router-view>
+							</div>
+						</div>
+					`,
+				data:function(){
+					return {msg:'hello ,vue router!!!'}
+				}
+			};
+			
+			const news = { //新闻组件
+				template:`
+					<div class="changes">
+						<ul>
+							<li v-for="(item,index) in arr" v-bind:class="{active:index==now}" @click="show(index)">
+								<router-link :to='item.link'>{{item.name}}---{{index}}</router-link>
+							</li>
+						</ul>
+						<router-view></router-view>
+					</div>
+				`,
+				data:function(){
+					return {
+						arr: [
+							{name:'张三',link:'/home/news/张三'},
+							{name:'李四',link:'/home/news/李四'},
+							{name:'王五',link:'/home/news/王五'},
+							{name:'麻子',link:'/home/news/麻子'}
+						],
+						now:-1
+					}
+				},
+				methods:{
+					show:function(index){
+						this.now = index;
+					}
+				}
+			};
+			
+			const message = { //message
+				template:`
+					<ol>
+						<li v-for="val in arr" v-html='val'></li>
+					</ol>
+				`,
+				data:function(){
+					return {
+						arr:[1,1,1,11,1,1]
+					}
+				}
+			};
+			
+			const messageInfo = {
+				template:'<div>嵌套路由的名字为：{{$route.params.name}}</div>'
+			}
+			
+			var About = {  //关于组件
+				template:`<div>
+						<h2>about</h2>
+						<p>This is the tutorial about vue-router.</p>
+					</div>`,
+			}
+			
+			//创建路由的实例
+			var myRouters = new VueRouter({
+				routes : [
+					{
+						path:"/",
+						component:Home,
+						children:[
+							{
+								path:'home/news',
+								component:news,
+								children:[
+									{
+										path:':name',
+										component : messageInfo
+									}
+								]
+							},
+							{path:'home/message',component:message},
+						]
+					},
+					{path:'/about',component:About}
+				]
+			});
+			
+			new Vue({
+				el : "#box",
+				router : myRouters
+			});
+		</script>
+	</body>
+</html>
