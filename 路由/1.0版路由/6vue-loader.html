@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.v-link-active{color:#FF1493;}
+		</style>
+	</head>
+	<body>
+		
+		<div id="box">
+			<ul>
+				<li>
+					<a v-link="{path:'/home'}">主页</a>
+				</li>
+				<li>
+					<a v-link="{path:'/news'}">新闻</a>
+				</li>
+			</ul>
+			<div>
+				<router-view></router-view>
+			</div>
+		</div>
+		
+		<script type="text/javascript" src="vue.js" ></script>
+		<script type="text/javascript" src="vue-router.js" ></script>
+		
+		<script type="text/javascript">
+			
+			// webpack : 模块加载器，一切东西都是模块
+			/*	
+				.vue 文件:
+					放置的是vue组件的代码:
+						1 
+						<template>
+						</template>
+						
+						<style>
+						</style>
+						
+						<script>
+							js .... es6
+						<\script>
+			*/
+		</script>
+		
+	</body>
+</html>
