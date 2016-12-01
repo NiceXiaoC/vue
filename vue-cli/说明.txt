@@ -1,0 +1,30 @@
+﻿
+vue-cli ---- vue脚手架
+	帮你提供好几本的项目结构
+	
+
+本身集成很多项目模板
+	simple   ---- 没什么卵用
+	webpack     可以使用（大型项目）
+		    Eslint 检查代码规范   (尽量不适用此规范，，大坑啊^-^)
+	            单元测试
+				
+	webpack-simple  没有代码检查（生成简单的目录）
+	
+	browserify
+	browserify-simple
+	
+
+基本配置：
+
+	1.	npm install vue-cli -g 安装vue命令环境
+		验证方法：vue --version
+	
+	2. 生成项目模板
+			vue init <模板名> 文件名
+	
+	3. 进入项目的模板
+		npm install --------> 安装依赖
+		
+	4. 启动
+		npm run dev
