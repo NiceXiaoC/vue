@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="box">
+			{{msg}}
+			<aaa></aaa>
+		</div>
+		
+		
+		
+		<script type="text/javascript" src="../../js/vue.js" ></script>
+		<script type="text/javascript">
+		
+			Vue.component('aaa',{
+				template:'<h3>组件<h3>'
+			})
+		
+			new Vue({
+				el:'#box',
+				data:{
+					msg:'hello'
+				}
+			})
+		</script>
+		
+	</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="box">
+			<h2>父级组件：{{giveData.a}}</h2>
+			<!--
+				:msg="msg"
+				子组件调用父组件数据，子组件使用props接受
+				
+				
+				:msg.sync="msg" //同步修改 父级组件的数据
+				
+			-->
+			<my-childs :msg='giveData'></my-childs>
+			
+			
+		</div>
+		
+		<template id="aaa">
+			<div>
+				<h4>这是子组件</h4>
+				<p>使用父组件的数据：<strong>{{msg.a}}</strong>	</p>
+				<input type="button" value="change" @click="change"/>
+			</div>
+		</template>
+		
+		<script src="../js/vue1.0.js"></script>
+		<script>
+			new Vue({
+				el : '#box',
+				data:{
+					giveData:{
+						a : '这是父组件数据'
+					}
+				},
+				components:{
+					'my-childs':{
+						props:['msg'],
+						template:"#aaa",
+						methods:{
+							change(){
+								this.msg = "调用父组件的数据被我改变了"
+							}
+						}
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

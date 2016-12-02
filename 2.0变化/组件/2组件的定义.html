@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="box">
+			{{msg}}
+			<aaa></aaa>
+		</div>
+		
+		
+		<template id="aaa">
+				<div>
+					<a href="#">asdcasd</a>
+				</div>
+		</template>
+		
+		<script type="text/javascript" src="../../js/vue.js" ></script>
+		<script type="text/javascript">
+		
+			var Home = {
+				template:'#aaa'
+			}
+			Vue.component("aaa",Home)
+			new Vue({
+				el:'#box',
+				data:{
+					msg:'hello'
+				}
+			})
+		</script>
+		
+	</body>
+</html>
